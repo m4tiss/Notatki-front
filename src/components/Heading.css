@@ -1,0 +1,16 @@
+.title-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15vh;
+    font-size: x-large;
+}
+.title{
+    background-color: white;
+    padding:5px;
+    border-radius: 20px;
+    color:blueviolet;
+    margin-top: 20px;
+    
+}
