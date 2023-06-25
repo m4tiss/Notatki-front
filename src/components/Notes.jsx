@@ -5,6 +5,8 @@ import NewNote from "./NewNote";
 import axios from "../axios";
 import Modal from "react-modal";
 import EditNote from "./EditNote";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
 
 const Notes = () => {
   const [notes, setNotes] = useState([]);
@@ -28,12 +30,16 @@ const Notes = () => {
 
   const addNote = (note) => {
     const newNotes = [...notes];
-    axios.post('/notes',note).then((res)=>{
-        const newNote = res.data;
-        newNotes.push(newNote);
-        setIdIterrator(idIterrator+1);
-        setNotes(newNotes);
-      })
+      axios.post('/notes', note)
+        .then((res) => {
+          const newNote = res.data;
+          newNotes.push(newNote);
+          setIdIterrator(idIterrator + 1);
+          setNotes(newNotes);
+        })
+        .catch((err) => {
+          NotificationManager.error(err.response.data.message);
+        });
   };
 
 
@@ -78,6 +84,7 @@ const Notes = () => {
   }
   return (
     <div className="notes-container">
+      <NotificationContainer/>
       <NewNote 
       onAdd={addNote}
       newID={idIterrator}/>
