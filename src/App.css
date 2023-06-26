@@ -5,8 +5,8 @@
 body{
   background-color: #21D4FD;
   background-image: linear-gradient(180deg, #21D4FD 0%, #B721FF 100%);
-  min-height: 100vh;
 }
 .app-section{
   margin-bottom: 50px;
+  min-height: 750px;
 }

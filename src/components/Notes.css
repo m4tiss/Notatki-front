@@ -25,7 +25,7 @@
     align-items: center;
     color:blueviolet;
     cursor:pointer;
-    margin-top:4vh;
+    margin-top:40px;
     word-break: break-word;
     padding-left: 20px;
     padding-right: 20px;
@@ -59,6 +59,7 @@
     width: 10vw;
     min-width: 100px;
     height: 5vh;
+    min-height: 40px;
     font-size: x-large;
     margin-top: 20px;
     cursor: pointer;
@@ -76,6 +77,7 @@
     margin-right: auto;
     width: 80%;
     height: 3vh;
+    min-height: 24px;
     border-radius: 30px;
     padding-left: 5px;
     padding-right: 5px;
@@ -95,4 +97,8 @@
     margin-left: auto;
     margin-right: auto;
     margin-top:5vh ;
+}
+
+@media (max-height: 700px){
+
 }
