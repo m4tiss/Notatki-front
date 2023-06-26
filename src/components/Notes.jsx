@@ -7,12 +7,14 @@ import Modal from "react-modal";
 import EditNote from "./EditNote";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
+import { MutatingDots } from 'react-loader-spinner'
 
 const Notes = () => {
   const [notes, setNotes] = useState([]);
   const [showEditModal, setShowEditModal] = useState(false);
   const [editNote, setEditNote] = useState({});
   const [idIterrator, setIdIterrator] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const customStyles = {
     content: {
@@ -44,6 +46,7 @@ const Notes = () => {
 
 
    useEffect(()=>{
+    setLoading(true);
      axios.get('/notes').then(
        (res)=>{
         const uploadedNotes = res.data;
@@ -51,7 +54,7 @@ const Notes = () => {
         setNotes(uploadedNotes);
         console.log(res.data);
        }
-     )
+     ).finally(() => setLoading(false));
    },[])
 
   const deleteNote = (_id) => {
@@ -107,16 +110,34 @@ const Notes = () => {
         </div>
         
       </Modal>
+      {loading ? (
+  <MutatingDots
+    height="100"
+    width="100"
+    color="white"
+    marginTop="50px"
+    secondaryColor="purple"
+    radius="12.5"
+    ariaLabel="mutating-dots-loading"
+    wrapperStyle={{ marginTop: '50px' }}
+    wrapperClass=""
+    visible={true}
+  />
+) : (
+  notes.map((note) => (
+    <Note
+      key={note._id}
+      _id={note._id}
+      title={note.title}
+      body={note.body}
+      onDelete={deleteNote}
+      onEdit={editNoteHandler}
+    />
+  ))
+)}
 
-      {notes.map((note) => (
-        <Note
-          _id={note._id}
-          title={note.title}
-          body={note.body}
-          onDelete={deleteNote}
-          onEdit={editNoteHandler}
-        />
-      ))}
+
+
     </div>
   );
 };
